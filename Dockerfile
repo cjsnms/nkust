@@ -5,7 +5,7 @@ MAINTAINER aksarav@middlewareinventory.com
 RUN mkdir /opt/tomcat/
 
 WORKDIR /opt/tomcat
-RUN curl -O https://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.54/bin/apache-tomcat-8.5.54.tar.gz
+RUN curl -O https://downloads.apache.org/tomcat/tomcat-8/v8.5.54/bin/apache-tomcat-8.5.54.tar.gz
 RUN tar zxvf apache-tomcat-8.5.54.tar.gz
 RUN mv apache-tomcat-8.5.54/* /opt/tomcat/.
 RUN yum -y install java
