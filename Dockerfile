@@ -1,8 +1,19 @@
-FROM tomcat:8.5.35-jre10
-MAINTAINER Docker cjs <jscheng@nkust.edu.tw>
-RUN wget https://tomcat.apache.org/tomcat-8.0-doc/appdev/sample/sample.war
-ADD sample.war /usr/local/tomcat/webapps/
-EXPOSE 8080
-CMD chmod +x /usr/local/tomcat/bin/catalina.sh
-CMD ["catalina.sh", "run"]
+FROM centos
 
+MAINTAINER aksarav@middlewareinventory.com
+
+RUN mkdir /opt/tomcat/
+
+WORKDIR /opt/tomcat
+RUN curl -O https://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.40/bin/apache-tomcat-8.5.40.tar.gz
+RUN tar xvfz apache*.tar.gz
+RUN mv apache-tomcat-8.5.40/* /opt/tomcat/.
+RUN yum -y install java
+RUN java -version
+
+WORKDIR /opt/tomcat/webapps
+RUN curl -O -L https://github.com/AKSarav/SampleWebApp/raw/master/dist/SampleWebApp.war
+
+EXPOSE 8080
+
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
